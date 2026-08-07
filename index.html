@@ -895,6 +895,13 @@
       }
     }
 
+    @media(min-width:1024px) {
+      .policy-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+      }
+    }
+
     .policy-card {
       background: var(--cream);
       border-radius: 18px;
@@ -3100,16 +3107,15 @@
           </div>
         </div>
 
-        <!-- 4 Core High-Impact Policy Cards -->
+        <!-- 6 Core High-Impact Policy Cards -->
         <div class="policy-grid" id="policyGrid">
 
           <!-- Policy 1 -->
           <div class="policy-card" data-policy="p1">
             <div>
-              <span class="policy-tag">Access Mandate</span>
-              <h3>1. Free Period Products in All Schools</h3>
-              <p>Mandate that all educational institutions provide free, easily accessible sanitary pads and hygiene
-                supplies in restrooms.</p>
+              <span class="policy-tag">Education &amp; Curriculum</span>
+              <h3>1. Comprehensive Menstrual Health Education in Every School</h3>
+              <p>Integrate age-appropriate, stigma-free menstrual and reproductive health education into every school curriculum for all students.</p>
             </div>
             <div>
               <div class="vote-actions">
@@ -3134,10 +3140,9 @@
           <!-- Policy 2 -->
           <div class="policy-card" data-policy="p2">
             <div>
-              <span class="policy-tag">Tax Equality</span>
-              <h3>2. Abolish the "Pink Tax" (0% VAT/Tax)</h3>
-              <p>Classify menstrual hygiene products as essential medical goods with zero sales tax and no luxury tariff
-                surcharges.</p>
+              <span class="policy-tag">Access &amp; Equity</span>
+              <h3>2. Free Menstrual Products in Schools, Colleges &amp; Public Institutions</h3>
+              <p>Mandate and supply free, easily accessible menstrual hygiene products across all educational campuses and public facilities.</p>
             </div>
             <div>
               <div class="vote-actions">
@@ -3162,10 +3167,9 @@
           <!-- Policy 3 -->
           <div class="policy-card" data-policy="p3">
             <div>
-              <span class="policy-tag">Education</span>
-              <h3>3. Mandatory Stigma-Free Health Curriculum</h3>
-              <p>Incorporate age-appropriate, stigma-free reproductive and menstrual hygiene education for all genders
-                in school curricula.</p>
+              <span class="policy-tag">WASH Infrastructure</span>
+              <h3>3. Better WASH Facilities (Clean Toilets, Water, Soap &amp; Disposal Bins)</h3>
+              <p>Enforce clean running water, private functional stall doors, soap, and hygienic waste disposal bins in every school &amp; workplace restroom.</p>
             </div>
             <div>
               <div class="vote-actions">
@@ -3190,10 +3194,9 @@
           <!-- Policy 4 -->
           <div class="policy-card" data-policy="p4">
             <div>
-              <span class="policy-tag">Sanitation</span>
-              <h3>4. WASH Standards (Water, Privacy &amp; Bins)</h3>
-              <p>Enforce clean running water, private functional stall doors, and hygienic disposal bins in every school
-                &amp; workplace bathroom.</p>
+              <span class="policy-tag">Affordability &amp; Taxes</span>
+              <h3>4. Affordable or Tax-Free Menstrual Products</h3>
+              <p>Classify menstrual hygiene products as essential medical goods with zero VAT/sales tax and remove luxury tariffs to ensure affordability.</p>
             </div>
             <div>
               <div class="vote-actions">
@@ -3210,6 +3213,60 @@
                 <div class="vote-tally-legend">
                   <span id="txt-p4-support">Support: 0%</span>
                   <span id="txt-p4-count">0 votes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Policy 5 -->
+          <div class="policy-card" data-policy="p5">
+            <div>
+              <span class="policy-tag">Advocacy &amp; Culture</span>
+              <h3>5. Nationwide Awareness Campaigns to Reduce Menstrual Stigma</h3>
+              <p>Conduct government-backed and community-led public education campaigns across media and grassroots to dismantle taboos and period shaming.</p>
+            </div>
+            <div>
+              <div class="vote-actions">
+                <button class="vote-opt-btn" data-vote="support">👍 Support</button>
+                <button class="vote-opt-btn" data-vote="essential">⭐ Essential</button>
+                <button class="vote-opt-btn" data-vote="needs_work">💬 Needs Work</button>
+              </div>
+              <div class="vote-tally-box">
+                <div class="vote-tally-bar">
+                  <div class="bar-support" id="bar-p5-support" style="width:0%;"></div>
+                  <div class="bar-essential" id="bar-p5-essential" style="width:0%;"></div>
+                  <div class="bar-work" id="bar-p5-work" style="width:0%;"></div>
+                </div>
+                <div class="vote-tally-legend">
+                  <span id="txt-p5-support">Support: 0%</span>
+                  <span id="txt-p5-count">0 votes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Policy 6 -->
+          <div class="policy-card" data-policy="p6">
+            <div>
+              <span class="policy-tag">Government Budget</span>
+              <h3>6. Increased Government Funding for Menstrual Health Programs</h3>
+              <p>Allocate dedicated public health budgets and funding for adolescent reproductive health programs, research, and community-level supplies.</p>
+            </div>
+            <div>
+              <div class="vote-actions">
+                <button class="vote-opt-btn" data-vote="support">👍 Support</button>
+                <button class="vote-opt-btn" data-vote="essential">⭐ Essential</button>
+                <button class="vote-opt-btn" data-vote="needs_work">💬 Needs Work</button>
+              </div>
+              <div class="vote-tally-box">
+                <div class="vote-tally-bar">
+                  <div class="bar-support" id="bar-p6-support" style="width:0%;"></div>
+                  <div class="bar-essential" id="bar-p6-essential" style="width:0%;"></div>
+                  <div class="bar-work" id="bar-p6-work" style="width:0%;"></div>
+                </div>
+                <div class="vote-tally-legend">
+                  <span id="txt-p6-support">Support: 0%</span>
+                  <span id="txt-p6-count">0 votes</span>
                 </div>
               </div>
             </div>
@@ -4567,10 +4624,12 @@
       =========================================================== */
       var CLOUD_KV_URL = "https://api.counterapi.dev/v1/bloom-tulip-2026";
       var POLICY_NAMES = {
-        p1: "Free Period Products in Schools",
-        p2: "Abolish the Pink Tax (0% VAT)",
-        p3: "Mandatory Stigma-Free Curriculum",
-        p4: "WASH Standards (Water & Privacy)"
+        p1: "Comprehensive School Menstrual Health Education",
+        p2: "Free Menstrual Products in Schools & Public Institutions",
+        p3: "Better WASH Facilities (Water, Soap & Bins)",
+        p4: "Affordable or Tax-Free Menstrual Products",
+        p5: "Nationwide Stigma Reduction Awareness Campaigns",
+        p6: "Increased Government Funding for MHM Programs"
       };
 
       var currentBallots = storage.get("bloom_real_ballots", []);
@@ -4591,6 +4650,21 @@
               renderVotingUI();
             }
           };
+        }
+
+        // Restore active selection states if present
+        if (localUserChoice) {
+          Object.keys(localUserChoice).forEach(function (pKey) {
+            var card = document.querySelector('.policy-card[data-policy="' + pKey + '"]');
+            if (card) {
+              var voteVal = localUserChoice[pKey];
+              var btn = card.querySelector('.vote-opt-btn[data-vote="' + voteVal + '"]');
+              if (btn) {
+                btn.classList.add("active");
+                card.classList.add("voted");
+              }
+            }
+          });
         }
 
         document.querySelectorAll(".vote-opt-btn").forEach(function (btn) {
@@ -4617,11 +4691,12 @@
 
           if (!name) return;
 
+          var defaultChoices = { p1: "support", p2: "support", p3: "support", p4: "support", p5: "support", p6: "support" };
           var ballot = {
             name: name,
             role: role,
             note: note || "Endorsed menstrual equity policies",
-            choices: Object.keys(localUserChoice).length > 0 ? Object.assign({}, localUserChoice) : { p1: "support", p2: "support", p3: "support", p4: "support" },
+            choices: Object.keys(localUserChoice).length > 0 ? Object.assign({}, localUserChoice) : defaultChoices,
             at: new Date().toISOString()
           };
 
@@ -4659,7 +4734,9 @@
           p1: { support: 0, essential: 0, needs_work: 0, total: 0 },
           p2: { support: 0, essential: 0, needs_work: 0, total: 0 },
           p3: { support: 0, essential: 0, needs_work: 0, total: 0 },
-          p4: { support: 0, essential: 0, needs_work: 0, total: 0 }
+          p4: { support: 0, essential: 0, needs_work: 0, total: 0 },
+          p5: { support: 0, essential: 0, needs_work: 0, total: 0 },
+          p6: { support: 0, essential: 0, needs_work: 0, total: 0 }
         };
 
         currentBallots.forEach(function (b) {
@@ -4676,7 +4753,7 @@
           }
         });
 
-        ["p1", "p2", "p3", "p4"].forEach(function (pKey) {
+        ["p1", "p2", "p3", "p4", "p5", "p6"].forEach(function (pKey) {
           var t = tallies[pKey];
           var tot = t.total || 0;
           var sPct = tot > 0 ? Math.round((t.support / tot) * 100) : 0;
@@ -4723,7 +4800,9 @@
           p1: { name: POLICY_NAMES.p1, support: 0, essential: 0, needs_work: 0, total: 0 },
           p2: { name: POLICY_NAMES.p2, support: 0, essential: 0, needs_work: 0, total: 0 },
           p3: { name: POLICY_NAMES.p3, support: 0, essential: 0, needs_work: 0, total: 0 },
-          p4: { name: POLICY_NAMES.p4, support: 0, essential: 0, needs_work: 0, total: 0 }
+          p4: { name: POLICY_NAMES.p4, support: 0, essential: 0, needs_work: 0, total: 0 },
+          p5: { name: POLICY_NAMES.p5, support: 0, essential: 0, needs_work: 0, total: 0 },
+          p6: { name: POLICY_NAMES.p6, support: 0, essential: 0, needs_work: 0, total: 0 }
         };
 
         currentBallots.forEach(function (b) {
