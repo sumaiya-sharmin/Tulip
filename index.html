@@ -3861,6 +3861,10 @@
   <!-- jsPDF for printable PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 
+  <!-- Google Firebase Realtime Database SDK (Compat) for 100% Live Multi-Device Sync -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
   <script>
     (function () {
       "use strict";
@@ -4620,9 +4624,31 @@
       }
 
       /* ===========================================================
-         REAL-TIME MULTI-USER CLOUD VOTING ENGINE
+         REAL-TIME MULTI-USER CLOUD VOTING ENGINE (POWERED BY FIREBASE)
       =========================================================== */
-      var CLOUD_KV_URL = "https://api.counterapi.dev/v1/bloom-tulip-2026";
+      var firebaseConfig = {
+        apiKey: "AIzaSyAaG2My0fmH0Zriz5Sm8ifdkvyKPyRuu9g",
+        authDomain: "tulip-bdc09.firebaseapp.com",
+        databaseURL: "https://tulip-bdc09-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "tulip-bdc09",
+        storageBucket: "tulip-bdc09.firebasestorage.app",
+        messagingSenderId: "415503962632",
+        appId: "1:415503962632:web:1785c1185cec29c99c37bd",
+        measurementId: "G-34LDJH1EKX"
+      };
+
+      var db = null;
+      try {
+        if (window.firebase) {
+          if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+          }
+          db = firebase.database();
+        }
+      } catch (err) {
+        console.warn("Firebase initialization note:", err);
+      }
+
       var POLICY_NAMES = {
         p1: "Comprehensive School Menstrual Health Education",
         p2: "Free Menstrual Products in Schools & Public Institutions",
@@ -4639,8 +4665,19 @@
 
       function initRealtimeVoting() {
         renderVotingUI();
-        fetchRemoteVotes();
-        setInterval(fetchRemoteVotes, 6000);
+
+        // Real-Time WebSockets Listener across all devices & phones
+        if (db) {
+          db.ref("ballots").on("value", function (snapshot) {
+            var val = snapshot.val();
+            if (val) {
+              var list = Object.keys(val).map(function (k) { return val[k]; });
+              currentBallots = list;
+              storage.set("bloom_real_ballots", currentBallots);
+              renderVotingUI();
+            }
+          });
+        }
 
         if (syncBroadcast) {
           syncBroadcast.onmessage = function (msg) {
@@ -4843,19 +4880,14 @@
         document.getElementById("reportModal").classList.add("show");
       }
 
-      function fetchRemoteVotes() {
-        try {
-          fetch(CLOUD_KV_URL + "/ballots/up")
-            .then(function (res) { return res.json(); })
-            .then(function (data) { })
-            .catch(function () { });
-        } catch (e) { }
-      }
-
       function pushVoteToCloud(ballot) {
-        try {
-          fetch(CLOUD_KV_URL + "/vote_cast/up", { method: "GET" }).catch(function () { });
-        } catch (e) { }
+        if (db) {
+          try {
+            db.ref("ballots").push(ballot);
+          } catch (e) {
+            console.error("Firebase vote push error:", e);
+          }
+        }
       }
 
       function escapeHtml(str) {
@@ -5135,6 +5167,12 @@
           allPledges.unshift(newPledge); // Newest first!
           storage.set("bloom_pledges_wall", allPledges);
 
+          if (db) {
+            try {
+              db.ref("pledges").push(newPledge);
+            } catch (e) { }
+          }
+
           if (syncBroadcast) {
             syncBroadcast.postMessage({ type: "pledge_update", pledges: allPledges });
           }
@@ -5143,6 +5181,19 @@
           document.getElementById("pledgeMessage").value = "";
           fireConfetti();
         });
+
+        // Real-Time Multi-Device Pledge Listener
+        if (db) {
+          db.ref("pledges").on("value", function (snapshot) {
+            var val = snapshot.val();
+            if (val) {
+              var customPledges = Object.keys(val).map(function (k) { return val[k]; }).reverse();
+              allPledges = customPledges.concat(DEFAULT_PLEDGES);
+              storage.set("bloom_pledges_wall", allPledges);
+              renderPledges();
+            }
+          });
+        }
 
         if (syncBroadcast) {
           syncBroadcast.addEventListener("message", function (msg) {
